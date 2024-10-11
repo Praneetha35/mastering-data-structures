@@ -57,8 +57,17 @@ class BST:
                 print("Node is not found")
                 
             
+    def min_node(self):
+        current = self
+        while current.left:
+            current = current.left
+        print("Minimum Node:", current.key)
         
-        
+    def max_node(self):
+        current = self
+        while current.right:
+            current = current.right
+        print("Maximum Node:", current.key)
         
 root = BST(None)
 lst = [10,6,3,1,6,98,3,7] 
@@ -72,6 +81,10 @@ print("\nPostorder:")  # 1 3 7 6 98 10
 root.postorder()  # 1 3 7 6 98 10
 print()
 root.search(4)
+print()
+root.min_node()
+print()
+root.max_node()
 
 
 
