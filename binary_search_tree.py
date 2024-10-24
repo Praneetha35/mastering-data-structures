@@ -93,7 +93,19 @@ class BST:
                 if node.right:
                     stack.append([node.right, depth + 1])
         return max_depth
+    def invert_tree(self):
+        if not self:
+            return None
 
+        if self.left:
+            self.left.invert_tree()
+
+        if self.right:
+            self.right.invert_tree()
+
+        self.left, self.right = self.right, self.left
+
+        return self
 
 # Test the BST with max depth methods
 root = BST(None)
@@ -122,3 +134,15 @@ print("\nMax Depth (Recursive):", root.max_depth_recursive())
 
 # Max Depth (Iterative)
 print("Max Depth (Iterative):", root.max_depth_iterative())
+
+print("Preorder before inversion:")
+root.preorder()  # Expected: 10 6 3 1 7 98
+
+print("\nInverting tree...")
+root.invert_tree()  # Invert the tree
+
+print("Preorder after inversion:")
+root.preorder()  # Expected (inverted): 10 98 6 7 3 1
+
+print("\nInorder after inversion:")
+root.inorder()  # Expected (inverted): 98 10 7 6 3 1
