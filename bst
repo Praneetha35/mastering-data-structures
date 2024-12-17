@@ -19,7 +19,6 @@ class Tree:
         if not root:
             return 0
         queue = deque([[root,1]])
-        res = []        
         while queue:
             node,depth = queue.popleft()
             
@@ -31,20 +30,30 @@ class Tree:
             
             if node.right:
                 queue.append([node.right,depth + 1])
-            
-        
-        
     
-    
-
-
+    def treeHeight(self,root):
+        if not root:
+            return 0
+        lHeight = self.treeHeight(root.left)
+        rHeight = self.treeHeight(root.right)
+        
+        if lHeight == -1 or rHeight == -1:
+            return -1
+        if abs(lHeight - rHeight) > 1:
+            return -1
+        return max(lHeight,rHeight)+1
+        
+    def isBalanced(self,root):
+        return self.treeHeight(root) != -1    
 
 root = Node(1)
 root.left = Node(2)
 root.right = Node(3)
 root.left.left = Node(4)
 root.left.right = Node(5)
+# root.left.left.left = Node(6) # Unbalanced
 
 ob1 = Tree()
 print("Maximum Depth:", ob1.maxDepth(root))
 print("Minimum Depth:", ob1.minDepth(root))
+print("Is the tree balanced", ob1.isBalanced(root))
